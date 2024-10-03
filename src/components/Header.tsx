@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const onAboutClick = () => {
+    navigate("/about");
+  };
   return (
     <header>
       <ul>
@@ -11,6 +15,7 @@ export default function Header() {
           <Link to={"/about"}>About</Link>
         </li>
       </ul>
+      <button onClick={onAboutClick}>About Page → </button>
     </header>
   );
 }
