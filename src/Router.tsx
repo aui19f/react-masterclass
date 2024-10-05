@@ -1,6 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
+import Chart from "./components/coin/Chart";
+import Price from "./components/coin/Price";
 import About from "./screens/About";
+import Coin from "./screens/coins/Coin";
+import Coins from "./screens/coins/Conins";
 import ComponentError from "./screens/ComponentError";
 import Home from "./screens/Home";
 import NotFound from "./screens/NotFound";
@@ -15,21 +19,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <Coins />,
         errorElement: <ComponentError />,
       },
       {
-        path: "about",
-        element: <About />,
-      },
-      {
-        path: "userlist/:userId",
-        element: <User />,
+        path: ":coinId",
+        element: <Coin />,
         children: [
-          {
-            path: "followers",
-            element: <Followers />,
-          },
+          { path: "chart", element: <Chart /> },
+          { path: "price", element: <Price /> },
         ],
       },
     ],
