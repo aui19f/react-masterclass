@@ -1,28 +1,32 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import { fetchCoins } from "../../api";
+
+const Container = styled.div`
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Header = styled.header`
   background-color: blue;
+  width: 100%;
   height: 120px;
   display: flex;
   justify-content: center;
   padding: 32px;
   color: white;
 `;
-const Container = styled.div`
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-`;
 
 const List = styled.ul`
   position: absolute;
+  max-width: 800px;
   top: 88px;
-  left: 12px;
-  right: 12px;
-  // padding: 12px;
+  width: 100%;
   background-color: white;
   border-radius: 4px;
   overflow: auto;
@@ -82,37 +86,30 @@ interface ICoin {
   type: string;
 }
 export default function Coins() {
-  const [coinData, setCoinData] = useState<ICoin[]>([]);
-  const [isLoading, setIsLoding] = useState(true);
-  const fetchCoins = async () => {
-    const res = await fetch(" https://api.coinpaprika.com/v1/coins");
-    const json = await res.json();
-    setCoinData(json.slice(0, 10));
-    setIsLoding(false);
-  };
-
-  useEffect(() => {
-    fetchCoins();
-  }, []);
+  const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
 
   return (
     <Container>
       <Header>
         <h2>Coin List</h2>
       </Header>
-      <List>
-        {coinData.map((coin) => (
-          <Coin key={coin.id}>
-            <Link to={coin.id} state={{ coin }}>
-              <img
-                src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
-              />
-              <h3>{coin.name}</h3>
-              {coin.rank < 4 ? <Rank>{coin.rank}</Rank> : null}
-            </Link>
-          </Coin>
-        ))}
-      </List>
+      {isLoading ? (
+        `isLoding`
+      ) : (
+        <List>
+          {data?.slice(0, 30).map((coin) => (
+            <Coin key={coin.id}>
+              <Link to={coin.id} state={{ coin }}>
+                <img
+                  src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
+                />
+                <h3>{coin.name}</h3>
+                {coin.rank < 4 ? <Rank>{coin.rank}</Rank> : null}
+              </Link>
+            </Coin>
+          ))}
+        </List>
+      )}
     </Container>
   );
 }

@@ -1,8 +1,6 @@
+import { QueryClient } from "react-query";
 import { Outlet } from "react-router";
-import { RouterProvider } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-import Header from "./components/Header";
-import router from "./Router";
 import { Reset } from "./styled/reset";
 
 const GlobalStyle = createGlobalStyle`
@@ -11,6 +9,9 @@ body{
   // color: ${(props) => props.theme.textColor}
 }
 `;
+
+// queryClient 생성
+const queryClient = new QueryClient();
 
 function App() {
   return (
