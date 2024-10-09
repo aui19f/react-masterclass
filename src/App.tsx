@@ -1,7 +1,10 @@
 import { QueryClient } from "react-query";
 import { Outlet } from "react-router";
-import { createGlobalStyle } from "styled-components";
+import { useRecoilValue } from "recoil";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { isDarkAtom } from "./atom";
 import { Reset } from "./styled/reset";
+import { darkTheme, lightTheme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 body{
@@ -14,11 +17,16 @@ body{
 const queryClient = new QueryClient();
 
 function App() {
+  //atom 값 가져오기
+  const value = useRecoilValue(isDarkAtom);
+
   return (
     <>
-      <Reset />
-      <GlobalStyle />
-      <Outlet />
+      <ThemeProvider theme={value ? darkTheme : lightTheme}>
+        <Reset />
+        <GlobalStyle />
+        <Outlet />
+      </ThemeProvider>
     </>
   );
 }

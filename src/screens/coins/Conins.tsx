@@ -1,9 +1,12 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { fetchCoins } from "../../api";
+import { isDarkAtom } from "../../atom";
 
 const Container = styled.div`
+  background-color: ${(props) => props.theme.bgColor};
   position: relative;
   height: 100vh;
   overflow: hidden;
@@ -24,7 +27,7 @@ const Header = styled.header`
 
 const List = styled.ul`
   position: absolute;
-  max-width: 800px;
+  max-width: 480px;
   top: 88px;
   width: 100%;
   background-color: white;
@@ -87,11 +90,14 @@ interface ICoin {
 }
 export default function Coins() {
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
-
+  const themeFn = useSetRecoilState(isDarkAtom);
+  // themeFn(true)
+  const onClick = () => themeFn((prev) => !prev);
   return (
     <Container>
       <Header>
         <h2>Coin List</h2>
+        <button onClick={onClick}>Dark Mode</button>
       </Header>
       {isLoading ? (
         `isLoding`

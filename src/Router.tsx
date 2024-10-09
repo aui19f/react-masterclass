@@ -9,6 +9,7 @@ import ComponentError from "./screens/ComponentError";
 import Home from "./screens/Home";
 import NotFound from "./screens/NotFound";
 import Followers from "./screens/users/Followers";
+import Join from "./screens/users/Join";
 import User from "./screens/users/User";
 import UserList from "./screens/users/UserList";
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
           { path: "chart", element: <Chart /> },
           { path: "price", element: <Price /> },
         ],
+      },
+      {
+        path: "join",
+        element: <Join />,
       },
     ],
     errorElement: <NotFound />,
