@@ -8,6 +8,7 @@ import Coins from "./screens/coins/Conins";
 import ComponentError from "./screens/ComponentError";
 import Home from "./screens/Home";
 import NotFound from "./screens/NotFound";
+import Main from "./screens/todo/Main";
 import Followers from "./screens/users/Followers";
 import Join from "./screens/users/Join";
 import User from "./screens/users/User";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         errorElement: <ComponentError />,
       },
       {
+        path: "about",
+        element: <About />,
+      },
+      {
         path: ":coinId",
         element: <Coin />,
         children: [
@@ -34,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "join",
         element: <Join />,
+      },
+      {
+        path: "todolist",
+        element: <Main />,
       },
     ],
     errorElement: <NotFound />,
