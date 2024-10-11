@@ -8,8 +8,8 @@ import { darkTheme, lightTheme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 body{
-  // background-color: ${(props) => props.theme.bgColor};
-  // color: ${(props) => props.theme.textColor}
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor}
 }
 `;
 

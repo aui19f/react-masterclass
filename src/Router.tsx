@@ -13,7 +13,7 @@ import Followers from "./screens/users/Followers";
 import Join from "./screens/users/Join";
 import User from "./screens/users/User";
 import UserList from "./screens/users/UserList";
-
+import Trello from "./screens/trello/Trello";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "todolist",
         element: <Main />,
+      },
+      {
+        path: "trello",
+        element: <Trello />,
       },
     ],
     errorElement: <NotFound />,

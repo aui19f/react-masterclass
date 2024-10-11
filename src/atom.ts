@@ -53,3 +53,15 @@ export const hoursSelector = selector({
     set(minuteState, minutes);
   },
 });
+
+interface ITodoObj {
+  [key: string]: string[];
+}
+export const trelloTodoState = atom<ITodoObj>({
+  key: "trelloTodoState",
+  default: {
+    todo: ["a", "b"],
+    doing: ["c", "d", "e"],
+    done: ["f"],
+  },
+});
