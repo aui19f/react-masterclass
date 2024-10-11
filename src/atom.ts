@@ -54,7 +54,7 @@ export const hoursSelector = selector({
   },
 });
 
-interface ITodoObj {
+export interface ITodoObj {
   [key: string]: string[];
 }
 export const trelloTodoState = atom<ITodoObj>({
