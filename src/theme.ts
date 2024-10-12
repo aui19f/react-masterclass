@@ -4,8 +4,8 @@ export const lightTheme: DefaultTheme = {
   textColor: "black",
   accentColor: "#9c88ff",
   cardBgColor: "white",
-  bgColor: "#3F8CF2",
-  boardColor: "#DADFE9",
+  bgColor: "rgba(222,222,222,.1)",
+  boardColor: "#eeeeee",
   cardColor: "white",
 };
 

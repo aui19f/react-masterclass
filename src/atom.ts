@@ -55,13 +55,45 @@ export const hoursSelector = selector({
 });
 
 export interface ITodoObj {
-  [key: string]: string[];
+  [key: string]: ITodo[];
 }
 export const trelloTodoState = atom<ITodoObj>({
   key: "trelloTodoState",
   default: {
-    todo: ["a", "b"],
-    doing: ["c", "d", "e"],
-    done: ["f"],
+    todo: [
+      {
+        id: 1,
+        text: "가가가",
+        updateAt: new Date().getTime(),
+        category: Categories.TODO,
+      },
+      {
+        id: 3,
+        text: "나나나",
+        updateAt: new Date().getTime(),
+        category: Categories.TODO,
+      },
+      {
+        id: 5,
+        text: "다다다",
+        updateAt: new Date().getTime(),
+        category: Categories.TODO,
+      },
+    ],
+    doing: [
+      {
+        id: 10,
+        text: "AAA",
+        updateAt: new Date().getTime(),
+        category: Categories.DOING,
+      },
+      {
+        id: 11,
+        text: "BBB",
+        updateAt: new Date().getTime(),
+        category: Categories.DOING,
+      },
+    ],
+    done: [],
   },
 });
