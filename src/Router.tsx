@@ -14,6 +14,7 @@ import Join from "./screens/users/Join";
 import User from "./screens/users/User";
 import UserList from "./screens/users/UserList";
 import Trello from "./screens/trello/Trello";
+import Animations from "./components/motions/Animations";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "trello",
         element: <Trello />,
+      },
+      {
+        path: "animations",
+        element: <Animations />,
       },
     ],
     errorElement: <NotFound />,

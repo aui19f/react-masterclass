@@ -1,5 +1,6 @@
 import React from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { ITodo, ITodoObj, trelloTodoState } from "../../atom";
@@ -26,6 +27,23 @@ const Boards = styled.div`
 
 function Trello() {
   const [trelloTodo, setTrelloTodo] = useRecoilState(trelloTodoState);
+  const { register, handleSubmit, setValue } = useForm<{ input: string }>();
+
+  const submit = ({ input }: { input: string }) => {
+    setTrelloTodo((oldBoards) => {
+      const copyBoards: ITodoObj = {};
+
+      Object.keys(oldBoards).forEach((x) => {
+        copyBoards[x] = [...oldBoards[x]];
+      });
+
+      const newBoard: ITodoObj = {};
+      newBoard[input] = [];
+      return { ...copyBoards, ...newBoard };
+    });
+
+    setValue("input", "");
+  };
 
   const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
     if (!destination) return;
@@ -50,7 +68,17 @@ function Trello() {
   };
   return (
     <>
-      <Header></Header>
+      <Header>
+        <h3>Trello</h3>
+
+        <form onSubmit={handleSubmit(submit)}>
+          <input
+            type="text"
+            {...register("input", { required: "보드이름을 입력해주세요." })}
+          />
+          <button>ADD</button>
+        </form>
+      </Header>
       <Contents>
         <DragDropContext onDragEnd={onDragEnd}>
           <Wrapper>
