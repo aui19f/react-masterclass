@@ -15,6 +15,9 @@ import User from "./screens/users/User";
 import UserList from "./screens/users/UserList";
 import Trello from "./screens/trello/Trello";
 import Animations from "./components/motions/Animations";
+import Netflix from "./netflix/Netflix";
+import Tv from "./netflix/Tv";
+import Search from "./netflix/Search";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -52,6 +55,20 @@ const router = createBrowserRouter([
       {
         path: "animations",
         element: <Animations />,
+      },
+      {
+        path: "netflix",
+        element: <Netflix />,
+        children: [
+          {
+            path: "tv",
+            element: <Tv />,
+          },
+          {
+            path: "search",
+            element: <Search />,
+          },
+        ],
       },
     ],
     errorElement: <NotFound />,
