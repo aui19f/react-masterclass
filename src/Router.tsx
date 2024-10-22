@@ -67,6 +67,10 @@ const router = createBrowserRouter([
             element: <NetflixHome />,
           },
           {
+            path: ":movieId",
+            element: <NetflixHome />,
+          },
+          {
             path: "tv",
             element: <Tv />,
           },
@@ -77,7 +81,7 @@ const router = createBrowserRouter([
         ],
       },
     ],
-    errorElement: <NotFound />,
+    // errorElement: <NotFound />,
   },
 ]);
 export default router;

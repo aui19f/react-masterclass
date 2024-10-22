@@ -1,6 +1,8 @@
 import { useQuery } from "react-query";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { getMovies, IGetMovieResult, IMovie } from "../api/netflixApi";
+import { getMovies, IGetMovieResult } from "../api/netflixApi";
+import { IMovie, movieList } from "../api/NetflixAtom";
 import { makeImagePath } from "../api/utils";
 import Slider from "./Slider";
 
@@ -16,7 +18,7 @@ const Loader = styled.div`
 `;
 
 const Banner = styled.div<{ bgPhoto: string }>`
-  height: 100vh;
+  height: 80vh;
   /* background-color: red; */
   display: flex;
   flex-direction: column;
@@ -39,6 +41,10 @@ const Title = styled.h2`
 
 export default function Home() {
   const { data, isLoading } = useQuery<IGetMovieResult>(["movies"], getMovies);
+  const [list, setList] = useRecoilState<IMovie[]>(movieList);
+  if (data?.results) {
+    setList(data?.results);
+  }
 
   return (
     <Wrapper>

@@ -4,6 +4,7 @@ export const isDarkAtom = atom({
   key: "isDark",
   default: false,
 });
+
 export enum Categories {
   "TODO" = "TODO",
   "DOING" = "DOING",
